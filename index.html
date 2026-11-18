@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeremy | OSINT &amp; threat intelligence projects</title>
+<meta name="description" content="Personal site of Jeremy, Singapore: OSINT, threat intelligence and brand-protection side projects built on public data.">
+<meta name="color-scheme" content="light dark">
+<!-- No analytics, no tracking scripts, no external fonts. -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="#top">Jeremy</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#focus">Focus</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">Singapore · OSINT · Threat intelligence</p>
+    <h1>Jeremy</h1>
+    <p class="tagline">I build small, careful tools that turn public data into clear, evidence-rated findings.</p>
+    <p class="lede">Personal projects in open-source intelligence, brand protection and risk, written in Python. Each one cites its sources, flags its own gaps, and never goes past public data.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">See the projects</a>
+      <a class="btn" href="https://github.com/N3bula04" rel="me noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="wrap section">
+  <h2>About</h2>
+  <div class="about">
+    <div>
+      <p>Singapore-based, interested in OSINT, threat intelligence and brand protection. I build small open-source tools on public data as personal projects.</p>
+      <p>These are learning and portfolio projects, not production systems. I care most about showing my sources, rating confidence honestly, and writing documentation that a non-technical reader can follow.</p>
+    </div>
+    <ul class="facts">
+      <li><span>Based in</span> Singapore</li>
+      <li><span>Interests</span> OSINT, threat intelligence, brand protection, risk</li>
+      <li><span>Builds with</span> Python, FastAPI, SQLite, pytest</li>
+    </ul>
+  </div>
+</section>
+
+<section id="focus" class="band">
+  <div class="wrap section">
+    <h2>Focus areas</h2>
+    <div class="grid cards6">
+      <article class="card"><h3>OSINT</h3><p>Collecting and pivoting on public data such as DNS, certificate-transparency logs and registration records, with every finding traced back to its source.</p></article>
+      <article class="card"><h3>Threat &amp; security intelligence</h3><p>Turning raw indicators into short, readable assessments with stated confidence and known gaps.</p></article>
+      <article class="card"><h3>Cyber threat intelligence (CTI)</h3><p>Infrastructure analysis: shared hosting, nameservers and certificates, with care not to over-read shared CDN or cloud signals.</p></article>
+      <article class="card"><h3>Brand protection</h3><p>Spotting lookalike and typosquat domains early, and packaging the evidence so someone else can act on it.</p></article>
+      <article class="card"><h3>Risk</h3><p>Weighing likelihood and impact plainly, and being honest when the data doesn't support a conclusion.</p></article>
+      <article class="card"><h3>Singapore &amp; APAC</h3><p>Interested in the regional context: local domains such as <code>.sg</code> and <code>.com.sg</code>, and how threats target APAC users.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="wrap section">
+  <h2>Projects</h2>
+  <p class="muted">Personal side projects. The code for these is private for now while I tidy it for release. Examples below use fictional names and reserved <code>.test</code> domains.</p>
+
+  <article class="project">
+    <header><h3>Domain Brand Alert</h3><p class="tags"><span class="priv">Code private for now</span><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Brand protection</span></p></header>
+    <p><strong>What it is:</strong> a small local web app that watches a brand's domain for lookalikes. It generates typosquat, homoglyph, bit-flip, hyphen and TLD variants, then checks them against public DNS, certificate-transparency logs (crt.sh) and RDAP.</p>
+    <ul>
+      <li>A watchlist with scheduled re-scans, allowlists and a "new since last scan" view, so only fresh findings surface.</li>
+      <li>Each finding has a severity, its source, a timestamp and a plain-language "why it matters".</li>
+      <li>A related-infrastructure panel shows where a lookalike overlaps with your own domain: the same IP, nameserver or certificate. It deliberately plays down overlaps that come from shared CDNs, bulk hosting or registrars.</li>
+      <li>A one-click evidence-pack ZIP, plus a demo mode with synthetic findings when public APIs are rate-limited.</li>
+    </ul>
+    <div class="example" aria-label="Fictional example">
+      <p class="ex-title">Fictional example</p>
+      <pre><code>watch: northwind-bakery.test
+HIGH  northwlnd-bakery.test   homoglyph (i→l)   resolves · new cert in CT log
+WARN  northwind-bakery-login.test  prefix/suffix     resolves · shares nameserver
+INFO  nortwind-bakery.test    missing letter    registered · no DNS</code></pre>
+    </div>
+    <p class="limits"><strong>Limits:</strong> results are heuristic signals with false positives, not attribution or takedown advice. Only monitor brands you're authorised to watch.</p>
+  </article>
+
+  <article class="project">
+    <header><h3>OSINT Pivot Tool</h3><p class="tags"><span class="priv">Code private for now</span><span>Python</span><span>CLI</span><span>CTI</span><span>pytest + CI</span></p></header>
+    <p><strong>What it is:</strong> a command-line tool that starts from one seed domain, collects public DNS, certificate-transparency and RDAP data, pivots one hop to related domains and IPs, and writes a Markdown report plus a CSV of links.</p>
+    <ul>
+      <li>Every link cites its evidence and data source, and carries a High, Medium or Low confidence rating with a one-line reason.</li>
+      <li>Shared infrastructure such as CDNs, managed DNS, mail providers and cloud hosting is flagged and downgraded, so coincidences don't read as connections.</li>
+      <li>Sources that fail or return nothing are logged, so gaps are visible rather than hidden.</li>
+      <li>It never attributes activity to a named actor. It has an offline synthetic demo, a pytest suite and GitHub Actions CI.</li>
+    </ul>
+  </article>
+
+  <article class="project">
+    <header><h3>osint-collectors</h3><p class="tags"><span class="priv">Code private for now</span><span>Python library</span><span>DNS</span><span>CT logs</span><span>RDAP</span></p></header>
+    <p><strong>What it is:</strong> a small shared library I pulled out of the two tools above so they use the same collectors for DNS records, crt.sh certificate entries and RDAP registration data.</p>
+    <ul>
+      <li>It handles the unglamorous parts: a local JSON cache that never caches errors, backoff on server errors, and respecting HTTP 429 / Retry-After instead of hammering free services.</li>
+      <li>Registrable-domain logic uses the Public Suffix List's ICANN section, so <code>shop.example.test</code> and hosted subdomains are grouped correctly.</li>
+      <li>An offline replay mode blocks the network, so tests are reproducible.</li>
+    </ul>
+    <p class="limits"><strong>Limits:</strong> a well-tested hobby library for small, occasional lookups by one person. It's not audited, not on PyPI and not meant for bulk scanning.</p>
+  </article>
+
+  <article class="project">
+    <header><h3>Open Source Person Brief</h3><p class="tags"><span class="priv">Code private for now</span><span>Python</span><span>FastAPI</span><span>Public sources</span><span>Ethics-first</span></p></header>
+    <p><strong>What it is:</strong> a local app that helps me get oriented before meeting a speaker, author or business contact. It compiles a one-page brief from public, indexed sources such as Wikipedia, Wikidata, Open Library and Crossref.</p>
+    <ul>
+      <li>Every brief records which sources returned usable data and whether the result is fully live, partial or a demo, so it never implies more certainty than it has.</li>
+      <li>Explicit confidence notes and a "gaps" section, because common names collide.</li>
+      <li>The demo mode uses a clearly fictional sample and is never attributed to the name that was searched.</li>
+    </ul>
+    <div class="ethics">
+      <p><strong>How I frame its use:</strong> public indexed data only, for a legitimate purpose such as preparing for a meeting, ideally with the person's knowledge. There's no login bypass, no private-profile scraping, no breach data and no email hunting. It isn't for doxxing, harassment or screening decisions, and anything it finds should be verified before you act on it.</p>
+    </div>
+  </article>
+
+  <article class="project">
+    <header><h3>Trading Bot Lab</h3><p class="tags"><span class="priv">Code private for now</span><span>Python</span><span>pandas</span><span>Backtesting</span><span>Research</span></p></header>
+    <p><strong>What it is:</strong> a personal research lab for testing trading ideas honestly. It covers published strategies and my own ideas on US ETFs and gold, from daily charts down to 5-minute charts.</p>
+    <ul>
+      <li>It's built to avoid fooling myself. Trades fill on the next bar with no lookahead, fees and slippage are included, costs are re-run at double, and years the rules were never tuned on are held back as a test.</li>
+      <li>Every strategy is compared against simply buying and holding.</li>
+    </ul>
+    <p class="finding"><strong>The candid finding:</strong> most strategies, especially the fast intraday ones, did <em>not</em> beat buy-and-hold once realistic costs were included. Several had a small edge before costs that the costs wiped out. The most useful thing the lab taught me is how easily a backtest flatters an idea.</p>
+    <p class="limits"><strong>Not financial advice.</strong> It's research and paper trading only: no real money, no broker connection and no profit claims.</p>
+  </article>
+</section>
+
+
+<section id="contact" class="wrap section">
+  <h2>Contact</h2>
+  <p>The best way to reach me about OSINT tooling, threat intelligence or any of these projects is through GitHub.</p>
+  <ul class="contact">
+    <li><span>GitHub</span> <a href="https://github.com/N3bula04" rel="me noopener">github.com/N3bula04</a></li>
+  </ul>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Jeremy. Personal site; views are my own. Projects use public data only. No tracking or analytics on this site.</p>
+  </div>
+</footer>
+</body>
+</html>
