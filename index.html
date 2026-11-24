@@ -30,7 +30,7 @@
     <p class="eyebrow">Singapore · OSINT · Threat intelligence</p>
     <h1>Jeremy</h1>
     <p class="tagline">I build small, careful tools that turn public data into clear, evidence-rated findings.</p>
-    <p class="lede">Personal projects in open-source intelligence, brand protection and risk, written in Python. Each one cites its sources, flags its own gaps, and never goes past public data.</p>
+    <p class="lede">Personal projects in open-source intelligence, brand protection and risk, mostly in Python. The OSINT tools cite their sources, flag their own gaps, and never go past public data.</p>
     <div class="cta">
       <a class="btn primary" href="#projects">See the projects</a>
       <a class="btn" href="https://github.com/N3bula04" rel="me noopener">GitHub</a>
@@ -69,10 +69,10 @@
 
 <section id="projects" class="wrap section">
   <h2>Projects</h2>
-  <p class="muted">Personal side projects. The OSINT Pivot Tool is public; the others are still private while I tidy them for release. Examples below use fictional names and reserved <code>.test</code> domains.</p>
+  <p class="muted">Personal side projects. Domain Brand Alert, the OSINT Pivot Tool, osint-collectors and Chipless are public on GitHub. Open Source Person Brief and Trading Bot Lab are still private while I tidy them for release. Examples below use fictional names and reserved <code>.test</code> domains.</p>
 
   <article class="project">
-    <header><h3>Domain Brand Alert</h3><p class="tags"><span class="priv">Code private for now</span><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Brand protection</span></p></header>
+    <header><h3>Domain Brand Alert</h3><p class="tags"><a class="code-link" href="https://github.com/N3bula04/domain-brand-alert" rel="noopener" aria-label="View code for Domain Brand Alert">View code</a><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Brand protection</span></p></header>
     <p><strong>What it is:</strong> a small local web app that watches a brand's domain for lookalikes. It generates typosquat, homoglyph, bit-flip, hyphen and TLD variants, then checks them against public DNS, certificate-transparency logs (crt.sh) and RDAP.</p>
     <ul>
       <li>A watchlist with scheduled re-scans, allowlists and a "new since last scan" view, so only fresh findings surface.</li>
@@ -80,7 +80,7 @@
       <li>A related-infrastructure panel shows where a lookalike overlaps with your own domain: the same IP, nameserver or certificate. It deliberately plays down overlaps that come from shared CDNs, bulk hosting or registrars.</li>
       <li>A one-click evidence-pack ZIP, plus a demo mode with synthetic findings when public APIs are rate-limited.</li>
     </ul>
-    <div class="example" aria-label="Fictional example">
+    <div class="example">
       <p class="ex-title">Fictional example</p>
       <pre><code>watch: northwind-bakery.test
 HIGH  northwlnd-bakery.test   homoglyph (i→l)   resolves · new cert in CT log
@@ -91,7 +91,7 @@ INFO  nortwind-bakery.test    missing letter    registered · no DNS</code></pre
   </article>
 
   <article class="project">
-    <header><h3>OSINT Pivot Tool</h3><p class="tags"><a class="code-link" href="https://github.com/N3bula04/osint-pivot-tool" rel="noopener">View code</a><span>Python</span><span>CLI</span><span>CTI</span><span>pytest + CI</span></p></header>
+    <header><h3>OSINT Pivot Tool</h3><p class="tags"><a class="code-link" href="https://github.com/N3bula04/osint-pivot-tool" rel="noopener" aria-label="View code for OSINT Pivot Tool">View code</a><span>Python</span><span>CLI</span><span>CTI</span><span>pytest + CI</span></p></header>
     <p><strong>What it is:</strong> a command-line tool that starts from one seed domain, collects public DNS, certificate-transparency and RDAP data, pivots one hop to related domains and IPs, and writes a Markdown report plus a CSV of links.</p>
     <ul>
       <li>Every link cites its evidence and data source, and carries a High, Medium or Low confidence rating with a one-line reason.</li>
@@ -102,7 +102,7 @@ INFO  nortwind-bakery.test    missing letter    registered · no DNS</code></pre
   </article>
 
   <article class="project">
-    <header><h3>osint-collectors</h3><p class="tags"><span class="priv">Code private for now</span><span>Python library</span><span>DNS</span><span>CT logs</span><span>RDAP</span></p></header>
+    <header><h3>osint-collectors</h3><p class="tags"><a class="code-link" href="https://github.com/N3bula04/osint-collectors" rel="noopener" aria-label="View code for osint-collectors">View code</a><span>Python library</span><span>DNS</span><span>CT logs</span><span>RDAP</span></p></header>
     <p><strong>What it is:</strong> a small shared library I pulled out of the two tools above so they use the same collectors for DNS records, crt.sh certificate entries and RDAP registration data.</p>
     <ul>
       <li>It handles the unglamorous parts: a local JSON cache that never caches errors, backoff on server errors, and respecting HTTP 429 / Retry-After instead of hammering free services.</li>
@@ -135,6 +135,15 @@ INFO  nortwind-bakery.test    missing letter    registered · no DNS</code></pre
     <p class="finding"><strong>The candid finding:</strong> most strategies, especially the fast intraday ones, did <em>not</em> beat buy-and-hold once realistic costs were included. Several had a small edge before costs that the costs wiped out. The most useful thing the lab taught me is how easily a backtest flatters an idea.</p>
     <p class="limits"><strong>Not financial advice.</strong> It's research and paper trading only: no real money, no broker connection and no profit claims.</p>
   </article>
+
+  <div class="other-tools">
+    <p class="other-heading">Other personal tools</p>
+    <article class="project">
+      <header><h3>Chipless</h3><p class="tags"><a class="code-link" href="https://n3bula04.github.io/poker/" rel="noopener" aria-label="Try the Chipless app">Try the app</a><a class="code-link" href="https://github.com/N3bula04/poker" rel="noopener" aria-label="View code for Chipless">View code</a><span>JavaScript</span><span>GitHub Pages</span></p></header>
+      <p><strong>What it is:</strong> a single-page browser poker chip tracker. Set players and stacks, then track antes, bets and pots as you play. Everything stays in your browser. No accounts and no API keys.</p>
+      <p class="limits"><strong>Limits:</strong> a personal learning project, not a commercial product or a gambling service.</p>
+    </article>
+  </div>
 </section>
 
 
