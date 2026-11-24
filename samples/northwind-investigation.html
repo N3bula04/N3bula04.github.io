@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northwind Bakery sample investigation | Jeremy</title>
+<meta name="description" content="A worked Domain Brand Alert case showing how I prioritise two lookalike domains in the fictional Northwind Bakery demo.">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="report-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="../index.html">Jeremy</a>
+    <ul>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#focus">Focus</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+  <header class="report-hero wrap">
+    <p class="back"><a href="../index.html#projects">← Back to portfolio</a></p>
+    <p class="eyebrow">Domain Brand Alert · Sample investigation</p>
+    <h1>Northwind Bakery lookalike investigation</h1>
+    <p class="lede">A fictional Domain Brand Alert demo for <code>northwind-bakery.test</code>. Priority tells me how soon to look. Confidence tells me how strongly the evidence supports impersonation.</p>
+    <ul>
+      <li>I would look first at <code>secure-northwind-bakery.test</code> (<strong>high priority, medium confidence</strong>). The nameserver overlap and login-style certificate names warrant verification.</li>
+      <li>I would downgrade <code>nrthwind-bakery.test</code> (<strong>medium priority, low confidence</strong>). The only links are a shared CDN address and the same registrar. Both are weak signals and establish no affiliation.</li>
+    </ul>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/N3bula04/domain-brand-alert" rel="noopener">View code on GitHub</a>
+    </div>
+  </header>
+
+  <div class="wrap report-body">
+    <aside class="banner" role="note">
+      <p class="banner-label">Fictional offline demo</p>
+      <p>This is synthetic Domain Brand Alert demo output. It uses reserved <code>.test</code> names and documentation IPs only. Nothing here describes real infrastructure. Overlaps are leads to verify. The tool does not attribute activity or recommend takedowns.</p>
+    </aside>
+
+    <nav class="toc" aria-label="Investigation sections">
+      <p>On this page</p>
+      <ol>
+        <li><a href="#alert">Alert</a></li>
+        <li><a href="#evidence">Evidence</a></li>
+        <li><a href="#assessment">Assessment</a></li>
+        <li><a href="#next-action">Next action</a></li>
+        <li><a href="#limits">Gaps and limits</a></li>
+      </ol>
+    </nav>
+
+    <section id="alert">
+      <h2>Alert</h2>
+      <p>The Northwind Bakery watchlist monitors <code>northwind-bakery.test</code>. The offline demo returned eight synthetic findings without live network queries.</p>
+      <div class="stats">
+        <div class="stat high"><p class="stat-value">2</p><p class="stat-label">High priority</p></div>
+        <div class="stat medium"><p class="stat-value">2</p><p class="stat-label">Medium priority</p></div>
+        <div class="stat low"><p class="stat-value">4</p><p class="stat-label">Low priority</p></div>
+      </div>
+      <h3>Brand baseline in the demo</h3>
+      <dl class="meta-list">
+        <div><dt>Addresses</dt><dd>Apex <code>192.0.2.10</code><br><code>www</code> at <code>203.0.113.20</code> in the fictional DemoCDN range <code>203.0.113.0/25</code></dd></div>
+        <div><dt>Nameservers</dt><dd><code>ns1.brand-dns.test</code><br><code>ns2.brand-dns.test</code></dd></div>
+        <div><dt>Registrar</dt><dd>Example Registrar Ltd (fictional)</dd></div>
+      </dl>
+    </section>
+
+    <section id="evidence">
+      <h2>Evidence</h2>
+      <h3><code>secure-northwind-bakery.test</code></h3>
+      <ul class="link-entities">
+        <li>The brand keyword and login-style <code>secure-</code> prefix triggered the alert. The fixture shows public DNS resolution and a notable nameserver overlap at <code>ns1.brand-dns.test</code>, outside the shared-provider flags. The other nameserver is <code>ns9.other-dns.test</code> and the MX points to <code>mx.secure-northwind-bakery.test</code>.</li>
+        <li>The certificate names include <code>login.secure-northwind-bakery.test</code> and <code>account-verify.secure-northwind-bakery.test</code>. The certificate is valid in the demo from <time datetime="2026-09-02">2026-09-02</time> to <time datetime="2026-12-01">2026-12-01</time>.</li>
+        <li>RDAP shows a recent registration on <time datetime="2026-09-01">2026-09-01</time> with Placeholder Names Inc (fictional), a different registrar from the brand's.</li>
+        <li>The documentation address <code>198.51.100.44</code> has PTR <code>host44.fictional-networks.test</code>. The holder of <code>198.51.100.0/24</code> is Fictional Networks Pte Ltd.</li>
+      </ul>
+
+      <h3><code>nrthwind-bakery.test</code></h3>
+      <ul class="link-entities">
+        <li>This missing-character typo resolves in the demo. Its nameservers are <code>ns1.parking-demo.test</code> and <code>ns2.parking-demo.test</code>.</li>
+        <li>It shares the brand's <code>www</code> address, <code>203.0.113.20</code>, in the fictional DemoCDN range. It uses the same registrar, Example Registrar Ltd (fictional). Registrar overlap is always a weak signal.</li>
+        <li>The certificate names cover only the typo and <code>www.nrthwind-bakery.test</code>, with no login-style SANs. The fixture records an older registration on <time datetime="2024-09-01">2024-09-01</time>.</li>
+      </ul>
+    </section>
+
+    <section id="assessment">
+      <h2>Assessment</h2>
+      <h3><code>secure-northwind-bakery.test</code></h3>
+      <p><span class="conf high">High priority</span> <span class="conf medium">Medium confidence</span></p>
+      <p>I would check this lead first. A defensive or official registration, a vendor or staging host, a DNS account the brand used, or coincidental naming could explain the signals.</p>
+      <p>A live login page mimicking the brand, use of mail or MX that supports credential harvesting, or further non-shared infrastructure overlap would raise my confidence. A verified defensive registration, a shared or managed DNS service I had misread, parked or inactive login hosts, or no brand-mimicking content would lower it.</p>
+
+      <h3><code>nrthwind-bakery.test</code></h3>
+      <p><span class="conf medium">Medium priority</span> <span class="conf low">Low confidence</span></p>
+      <p>I would log the resolving typo. Typo parking or traffic monetisation, an unrelated site using the same CDN, and a popular registrar used by unrelated domains could explain what I see.</p>
+      <p>A notable non-shared nameserver or certificate overlap, login-style certificate names, or brand-mimicking content would raise my confidence. Confirmed parking with no independent evidence would lower it further.</p>
+    </section>
+
+    <section id="next-action">
+      <h2>Next action</h2>
+      <ul>
+        <li>For <code>secure-northwind-bakery.test</code>, I would verify whether the overlapping nameserver and the login and account-verify certificate hostnames are in use, then capture that evidence. Impersonation remains unverified.</li>
+        <li>For <code>nrthwind-bakery.test</code>, I would log and monitor. I would need independent evidence before escalating beyond the shared CDN and registrar overlaps.</li>
+      </ul>
+    </section>
+
+    <section id="limits">
+      <h2>Gaps and limits</h2>
+      <ul>
+        <li>The tool uses public DNS, Certificate Transparency and RDAP only. This fictional run used offline fixtures. The tool does not fetch lookalike websites, so I have no site content to assess.</li>
+        <li>Shared CDN, hosting and registrar lists are incomplete.</li>
+        <li>Heuristic signals can produce false positives. Use them to guide verification. Only monitor brands you are authorised to watch.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Jeremy. Personal site; views are my own. This page is a fictional offline demo. No tracking or analytics on this site.</p>
+  </div>
+</footer>
+</body>
+</html>

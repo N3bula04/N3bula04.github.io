@@ -48,20 +48,25 @@
           <p class="kicker">Featured</p>
           <h3>Domain Brand Alert</h3>
         </div>
-        <p class="tags"><a class="code-link" href="https://github.com/N3bula04/domain-brand-alert" rel="noopener" aria-label="View code for Domain Brand Alert">View code</a><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Brand protection</span></p>
+        <p class="tags"><a class="code-link" href="samples/northwind-investigation.html" aria-label="Read the sample investigation for Northwind Bakery">Read the sample investigation</a><a class="code-link" href="https://github.com/N3bula04/domain-brand-alert" rel="noopener" aria-label="View code for Domain Brand Alert">View code</a><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Brand protection</span></p>
       </header>
+      <h4>Northwind Bakery sample investigation</h4>
+      <ul>
+        <li>I would look first at <code>secure-northwind-bakery.test</code> (<strong>high priority, medium confidence</strong>) because of the nameserver overlap and login-style certificate names.</li>
+        <li>I would downgrade <code>nrthwind-bakery.test</code> (<strong>medium priority, low confidence</strong>). The only overlaps are a shared CDN address and the same registrar, both weak signals.</li>
+      </ul>
       <p><strong>What it is:</strong> a small local web app that watches a brand's domain for lookalikes. It generates typosquat, homoglyph, bit-flip, hyphen and TLD variants, then checks them against public DNS, certificate-transparency logs (crt.sh) and RDAP.</p>
       <ul>
         <li>A watchlist with scheduled re-scans, allowlists and a "new since last scan" view, so only fresh findings surface.</li>
-        <li>Each finding has a severity, its source, a timestamp and a plain-language "why it matters".</li>
+        <li>Each finding shows priority and confidence separately, the trigger, what would change the assessment and the next action.</li>
         <li>A related-infrastructure panel shows where a lookalike overlaps with your own domain: the same IP, nameserver or certificate. It deliberately plays down overlaps that come from shared CDNs, bulk hosting or registrars.</li>
         <li>A one-click evidence-pack ZIP, plus a demo mode with synthetic findings when public APIs are rate-limited.</li>
       </ul>
       <figure class="project-figure">
         <a href="assets/brand-alert-demo.png">
-          <img src="assets/brand-alert-demo.png" alt="Domain Brand Alert brand-detail view for the fictional Northwind Bakery demo on northwind-bakery.test. The dashboard shows two high, two warning and four info findings, and the related-infrastructure panel is open on two lookalikes: secure-northwind-bakery.test, flagged for a nameserver overlap to check, and nrthwind-bakery.test, whose shared IP and registrar are marked weak because they sit on shared CDN or registrar infrastructure." width="1280" height="2442">
+          <img src="assets/brand-alert-demo.png" alt="Fictional Domain Brand Alert dashboard showing the nameserver overlap for secure-northwind-bakery.test (high priority, medium confidence in the worked case) and only shared CDN and registrar overlaps for nrthwind-bakery.test (medium priority, low confidence)" width="1280" height="4424">
         </a>
-        <figcaption>Fictional Northwind Bakery demo. The lookalike <code>nrthwind-bakery.test</code> shares an IP with the brand's own site, but that address sits in a published CDN range, so the overlap is marked weak rather than treated as proof of affiliation. Sharing a nameserver, as <code>secure-northwind-bakery.test</code> does, is flagged as something to check — still a lead, not a conclusion. Click the screenshot to open it full size, or scroll the frame to see the overlaps and findings.</figcaption>
+        <figcaption>Fictional demo screenshot. In the worked case, <code>secure-northwind-bakery.test</code> has high priority and medium confidence. I downgrade <code>nrthwind-bakery.test</code> to medium priority and low confidence because it shares only a CDN address and registrar.</figcaption>
       </figure>
       <p class="limits"><strong>Limits:</strong> results are heuristic signals with false positives, not attribution or takedown advice. Only monitor brands you're authorised to watch.</p>
     </article>
