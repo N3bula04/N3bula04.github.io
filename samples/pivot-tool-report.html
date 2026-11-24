@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OSINT Pivot Tool — fictional demo report | Jeremy</title>
+<meta name="description" content="Fictional offline demo report from the OSINT Pivot Tool, starting at example-demo.test. Shows evidence-rated links, confidence, and collection gaps. No live or real-world infrastructure.">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="report-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="../index.html">Jeremy</a>
+    <ul>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#focus">Focus</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+  <header class="report-hero wrap">
+    <p class="back"><a href="../index.html#projects">← Back to portfolio</a></p>
+    <p class="eyebrow">OSINT Pivot Tool · sample report</p>
+    <h1>Infrastructure pivot report: <code>example-demo.test</code></h1>
+    <p class="lede">The actual Markdown report produced by <code>python pivot.py --demo</code>, presented here so it can be read in the browser. Every name and address is fictional or reserved. Nothing in this report describes real infrastructure.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/N3bula04/osint-pivot-tool" rel="noopener">View code on GitHub</a>
+    </div>
+  </header>
+  <div class="wrap report-body">
+    <aside class='banner' role='note'><p class='banner-label'>Fictional offline demo output</p><p><strong>SYNTHETIC DEMO.</strong> Every name, IP address and registration record in this report comes from committed offline fixtures. The names use reserved or fictional domains and the IPs sit in documentation ranges (RFC 5737 / RFC 3849). Nothing here describes real infrastructure.</p><p><strong>Analyst note.</strong> Every link below is a lead, not a conclusion. Confidence reflects how well a single observation supports an infrastructure relationship; it is not an attribution. This tool does not name actors.</p></aside>
+    
+<nav class="toc" aria-label="Report sections">
+  <p>On this page</p>
+  <ol>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#certificate-transparency">Certificate transparency</a></li>
+    <li><a href="#ip-pivot">IP pivot</a></li>
+    <li><a href="#registration-data">Registration data</a></li>
+    <li><a href="#links">Links by confidence</a></li>
+    <li><a href="#shared">Shared-infrastructure flags</a></li>
+    <li><a href="#gaps">Gaps and limitations</a></li>
+  </ol>
+</nav>
+
+    
+<section id='meta'>
+<h2>Run details</h2>
+<dl class='meta-list'>
+<div><dt>Run started</dt><dd>2026-09-30T00:00:00+00:00</dd></div>
+<div><dt>Run finished</dt><dd>2026-09-30T00:00:00+00:00</dd></div>
+<div><dt>Stage</dt><dd>Stage 3 - DNS + certificate transparency + RDAP</dd></div>
+<div><dt>Method</dt><dd>offline replay of committed fixtures; no network connections at all</dd></div>
+<div><dt>Data</dt><dd>SYNTHETIC offline fixtures from <code>offline_demo/</code> (no network used); fictional/reserved names and documentation IP ranges only</dd></div>
+<div><dt>Cache</dt><dd>0 hit(s), 0 miss(es)</dd></div>
+<div><dt>Links CSV</dt><dd><code>example-demo.test_20260930T000000Z_links.csv</code></dd></div>
+</dl>
+</section>
+<section id='summary'>
+<h2>Summary</h2>
+<div class='stats'>
+<div class='stat'><p class='stat-value'>32</p><p class='stat-label'>Entities observed</p></div>
+<div class='stat'><p class='stat-value'>38</p><p class='stat-label'>Links</p></div>
+<div class='stat high'><p class='stat-value'>15</p><p class='stat-label'>High confidence</p></div>
+<div class='stat medium'><p class='stat-value'>17</p><p class='stat-label'>Medium confidence</p></div>
+<div class='stat low'><p class='stat-value'>6</p><p class='stat-label'>Low confidence (shared infrastructure)</p></div>
+<div class='stat'><p class='stat-value'>0</p><p class='stat-label'>Sources failed</p></div>
+<div class='stat'><p class='stat-value'>14</p><p class='stat-label'>Queries with no data</p></div>
+</div>
+</section>
+<section id='certificate-transparency'>
+<h2>Certificate transparency</h2>
+<ul>
+<li>Certificates matched: 5 (0 look like bulk/CDN-managed certificates)</li>
+<li>Unique names on those certificates: 8</li>
+<li>Names under the seed domain (subdomains): 3</li>
+<li>Other domains sharing a certificate with the seed: 4</li>
+<li>Top issuers: DEMO-R1 (5)</li>
+<li>Manual check: https://crt.sh/?q=example-demo.test</li>
+</ul>
+</section>
+<section id='ip-pivot'>
+<h2>IP pivot</h2>
+<ul>
+<li>Discovered names resolved: 9 (skipped 0)</li>
+<li>Seed IPs: 3</li>
+<li>Other domains sharing an IP with the seed: 1</li>
+<li><strong>Seed-owned hosts on IPs outside the seed&#x27;s own records</strong> (possible origin infrastructure behind a CDN): api.example-demo.test -&gt; 198.51.100.50; mx1.example-demo.test -&gt; 192.0.2.25; ns1.example-demo.test -&gt; 192.0.2.53</li>
+</ul>
+</section>
+<section id='registration-data'>
+<h2>Registration data (RDAP)</h2>
+<ul>
+<li>Registrar: Demo Registrar (fictional) (IANA ID 9999)</li>
+<li>Registered: 2026-08-20 | Last changed: 2026-09-01 | Expires: 2027-08-20</li>
+<li>Domain age: 41 days  <strong>(registered within the last 90 days)</strong></li>
+<li>Status: client transfer prohibited</li>
+<li>DNSSEC signed: False</li>
+<li>Registry nameservers: ns1.example-demo.test, ns2.dns-host-demo.test</li>
+<li>Registrant contact: fn=REDACTED FOR PRIVACY, org=Example Demo Ltd</li>
+<li>Technical contact: fn=Hostmaster, org==HYPERLINK(&quot;http://attacker.invalid/&quot;,&quot;click me&quot;), email=hostmaster [at] msp-demo.test</li>
+<li>Manual check: https://rdap.org/domain/example-demo.test or https://lookup.icann.org/lookup?name=example-demo.test</li>
+</ul>
+</section>
+<section id='ip-ownership'>
+<h2>IP ownership (RDAP)</h2>
+<ul>
+<li><code>192.0.2.10</code> is in <code>192.0.2.0/26</code> (EXAMPLE-DEMO-NET), holder: Example Demo Ltd, country ZZ, type ASSIGNMENT</li>
+<li><code>2001:db8:c10d::5</code> is in <code>2001:db8:c10d::/48</code> (DEMOCLOUD-V6), holder: Demo Cloud Hosting Inc (fictional), country ZZ, type ASSIGNMENT</li>
+<li><code>203.0.113.140</code> is in <code>203.0.113.128/25</code> (DEMOCDN-EDGE), holder: DemoCDN Edge Hosting (fictional), country ZZ, type ASSIGNMENT</li>
+<li><code>198.51.100.200</code> (IP of a related host) is in <code>198.51.100.128/25</code> (DEMOCLOUD-V4), holder: Demo Cloud Hosting Inc (fictional), country ZZ, type ASSIGNMENT</li>
+</ul>
+</section>
+<section id='records'>
+<h2>Raw records observed</h2>
+<div class='table-wrap' tabindex='0'><table><caption>Raw DNS, certificate and RDAP records observed in the demo</caption><thead><tr><th scope='col'>Query</th><th scope='col'>Answer</th></tr></thead><tbody><tr><td data-label='Query'><code>example-demo.test A</code></td><td data-label='Answer'><code>192.0.2.10</code></td></tr><tr><td data-label='Query'><code>example-demo.test A</code></td><td data-label='Answer'><code>203.0.113.140</code></td></tr><tr><td data-label='Query'><code>example-demo.test AAAA</code></td><td data-label='Answer'><code>2001:db8:c10d::5</code></td></tr><tr><td data-label='Query'><code>example-demo.test MX</code></td><td data-label='Answer'><code>10 mx1.example-demo.test.</code></td></tr><tr><td data-label='Query'><code>example-demo.test MX</code></td><td data-label='Answer'><code>20 aspmx.l.google.com.mail-spoof.test.</code></td></tr><tr><td data-label='Query'><code>example-demo.test NS</code></td><td data-label='Answer'><code>ns1.example-demo.test.</code></td></tr><tr><td data-label='Query'><code>example-demo.test NS</code></td><td data-label='Answer'><code>ns2.dns-host-demo.test.</code></td></tr><tr><td data-label='Query'><code>example-demo.test TXT</code></td><td data-label='Answer'><code>&quot;demo-site-verification=synthetic-token-0001&quot;</code></td></tr><tr><td data-label='Query'><code>example-demo.test TXT</code></td><td data-label='Answer'><code>&quot;v=spf1 mx include:_spf.salesforce.com.attacker.invalid include:mail.msp-demo.test -all&quot;</code></td></tr><tr><td data-label='Query'><code>_dmarc.example-demo.test TXT</code></td><td data-label='Answer'><code>&quot;v=DMARC1; p=reject; rua=dmarc [at] reports.msp-demo.test&quot;</code></td></tr><tr><td data-label='Query'><code>192.0.2.10 PTR</code></td><td data-label='Answer'><code>web1.example-demo.test.</code></td></tr><tr><td data-label='Query'><code>203.0.113.140 PTR</code></td><td data-label='Answer'><code>edge-140.democdn.test.</code></td></tr><tr><td data-label='Query'><code>2001:db8:c10d::5 PTR</code></td><td data-label='Answer'>*(no data)*</td></tr><tr><td data-label='Query'><code>crt.sh names under example-demo.test</code></td><td data-label='Answer'><code>api.example-demo.test</code></td></tr><tr><td data-label='Query'><code>crt.sh names under example-demo.test</code></td><td data-label='Answer'><code>old.example-demo.test</code></td></tr><tr><td data-label='Query'><code>crt.sh names under example-demo.test</code></td><td data-label='Answer'><code>www.example-demo.test</code></td></tr><tr><td data-label='Query'><code>198.51.100.50 PTR</code></td><td data-label='Answer'>*(no data)*</td></tr><tr><td data-label='Query'><code>192.0.2.25 PTR</code></td><td data-label='Answer'><code>mx1.example-demo.test.</code></td></tr><tr><td data-label='Query'><code>192.0.2.53 PTR</code></td><td data-label='Answer'><code>ns1.example-demo.test.</code></td></tr><tr><td data-label='Query'><code>rdap domain example-demo.test nameservers</code></td><td data-label='Answer'><code>ns1.example-demo.test</code></td></tr><tr><td data-label='Query'><code>rdap domain example-demo.test nameservers</code></td><td data-label='Answer'><code>ns2.dns-host-demo.test</code></td></tr></tbody></table></div>
+</section>
+<section id='links'>
+<h2>Links, by confidence</h2>
+<p>Each link is a lead, not a conclusion. High means the evidence is specific (for example a shared certificate or a self-hosted nameserver). Low usually means the related entity is shared infrastructure — a CDN, managed DNS, a mail provider, a registrar, or a bulk-hosting netblock — and should not be read as affiliation on its own.</p>
+<div class='links'>
+<h3 id='links-high'>High confidence <span class='count'>15</span></h3>
+<div class='link-grid' data-confidence='high'>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#1</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>ct_shared_certificate</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>partner-demo.test</code></span></p>
+  <p class="link-reason">Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation).</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>crt.sh cert 9000003 (issuer &#x27;DEMO-R1&#x27;, valid 2026-07-15 to 2026-10-13, 2 names) lists both example-demo.test and partner-demo.test; seen on 1 certificate(s); https://crt.sh/?id=9000003</code></p>
+  <p class="link-source"><span class="k">Data source</span> Certificate Transparency (crt.sh)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#2</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>ct_subdomain</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>api.example-demo.test</code></span></p>
+  <p class="link-reason">A CA issued a certificate for this name under the seed domain; the requester proved control of it.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>crt.sh cert 9000002 (issuer &#x27;DEMO-R1&#x27;, valid 2026-08-05 to 2026-11-03) lists api.example-demo.test; seen on 1 certificate(s); https://crt.sh/?id=9000002</code></p>
+  <p class="link-source"><span class="k">Data source</span> Certificate Transparency (crt.sh)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#3</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>ct_subdomain</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>old.example-demo.test</code></span></p>
+  <p class="link-reason">A CA issued a certificate for this name under the seed domain; the requester proved control of it. Certificate has expired, so the name may no longer be in use.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>crt.sh cert 9000004 (issuer &#x27;DEMO-R1&#x27;, valid 2024-01-10 to 2024-04-09) lists old.example-demo.test; seen on 1 certificate(s); https://crt.sh/?id=9000004</code></p>
+  <p class="link-source"><span class="k">Data source</span> Certificate Transparency (crt.sh)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#4</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>ct_subdomain</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>www.example-demo.test</code></span></p>
+  <p class="link-reason">A CA issued a certificate for this name under the seed domain; the requester proved control of it.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>crt.sh cert 9000001 (issuer &#x27;DEMO-R1&#x27;, valid 2026-08-01 to 2026-10-30) lists www.example-demo.test; seen on 1 certificate(s); https://crt.sh/?id=9000001</code></p>
+  <p class="link-source"><span class="k">Data source</span> Certificate Transparency (crt.sh)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#5</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>dns_a</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>192.0.2.10</code></span></p>
+  <p class="link-reason">DNS answer (recursive resolver) ties the domain directly to this IP. Check the RDAP netblock for bulk hosting before pivoting.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test A -&gt; 192.0.2.10</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#6</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>dns_a</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>mx1.example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>192.0.2.25</code></span></p>
+  <p class="link-reason">A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use, and PTR/RDAP ties that IP to the seed; likely the real origin server behind a CDN.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>mx1.example-demo.test A -&gt; 192.0.2.25</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#7</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>dns_a</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>ns1.example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>192.0.2.53</code></span></p>
+  <p class="link-reason">A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use, and PTR/RDAP ties that IP to the seed; likely the real origin server behind a CDN.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>ns1.example-demo.test A -&gt; 192.0.2.53</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#8</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>dns_mx</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>mx1.example-demo.test</code></span></p>
+  <p class="link-reason">Mail is handled by a host under the seed&#x27;s own domain (self-hosted mail).</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test MX 10 mx1.example-demo.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#9</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>dns_ns</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>ns1.example-demo.test</code></span></p>
+  <p class="link-reason">Nameserver is under the seed&#x27;s own domain (self-hosted DNS); strong ownership indicator.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test NS ns1.example-demo.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#10</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>dns_ptr</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>192.0.2.25</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>mx1.example-demo.test</code></span></p>
+  <p class="link-reason">Reverse DNS returns a hostname under the seed&#x27;s own domain; consistent forward/reverse ownership.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>192.0.2.25 PTR -&gt; mx1.example-demo.test  (25.2.0.192.in-addr.arpa.)</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#11</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>dns_ptr</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>192.0.2.53</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>ns1.example-demo.test</code></span></p>
+  <p class="link-reason">Reverse DNS returns a hostname under the seed&#x27;s own domain; consistent forward/reverse ownership.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>192.0.2.53 PTR -&gt; ns1.example-demo.test  (53.2.0.192.in-addr.arpa.)</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#12</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>dns_ptr</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>192.0.2.10</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>web1.example-demo.test</code></span></p>
+  <p class="link-reason">Reverse DNS returns a hostname under the seed&#x27;s own domain; consistent forward/reverse ownership.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>192.0.2.10 PTR -&gt; web1.example-demo.test  (10.2.0.192.in-addr.arpa.)</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#13</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>rdap_nameserver</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>ns1.example-demo.test</code></span></p>
+  <p class="link-reason">Registry lists a nameserver under the seed&#x27;s own domain (self-hosted DNS).</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP domain record for example-demo.test lists nameserver ns1.example-demo.test; https://rdap.org/domain/example-demo.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#14</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>rdap_netblock</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>192.0.2.10</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>192.0.2.0/26</code></span></p>
+  <p class="link-reason">Netblock holder name matches the seed&#x27;s registrant/name; the IP space appears dedicated to the same organisation.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP ip record for 192.0.2.10: network 192.0.2.0/26 name=&#x27;EXAMPLE-DEMO-NET&#x27; holder=&#x27;Example Demo Ltd&#x27; country=ZZ; https://rdap.org/ip/192.0.2.10</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#15</span>
+    <span class="conf high">High</span>
+    <span class="link-type"><code>shared_ip</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>partner-demo.test</code></span></p>
+  <p class="link-reason">Both domains resolve to the same IP right now, and PTR/RDAP ties that IP to the seed organisation; the other domain is likely hosted on the seed&#x27;s own infrastructure.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test A/AAAA -&gt; 192.0.2.10; partner-demo.test A/AAAA -&gt; 192.0.2.10 (both observed 2026-09-30T00:00:00+00:00)</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+</div>
+<h3 id='links-medium'>Medium confidence <span class='count'>17</span></h3>
+<div class='link-grid' data-confidence='medium'>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#16</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>ct_shared_certificate</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>old.example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>legacy-partner.test</code></span></p>
+  <p class="link-reason">Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation). Certificate has expired, so the relationship may be historical; confirm it still holds.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>crt.sh cert 9000004 (issuer &#x27;DEMO-R1&#x27;, valid 2024-01-10 to 2024-04-09, 2 names) lists both old.example-demo.test and legacy-partner.test; seen on 1 certificate(s); https://crt.sh/?id=9000004</code></p>
+  <p class="link-source"><span class="k">Data source</span> Certificate Transparency (crt.sh)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#17</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>ct_shared_certificate</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>portal.fictional-partner.co.uk</code></span></p>
+  <p class="link-reason">Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation). Certificate has expired, so the relationship may be historical; confirm it still holds.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>crt.sh cert 9000005 (issuer &#x27;DEMO-R1&#x27;, valid 2026-06-01 to 2026-08-30, 3 names) lists both example-demo.test and portal.fictional-partner.co.uk; seen on 1 certificate(s); https://crt.sh/?id=9000005</code></p>
+  <p class="link-source"><span class="k">Data source</span> Certificate Transparency (crt.sh)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#18</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>ct_shared_certificate</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>www.fictional-supplier.co.uk</code></span></p>
+  <p class="link-reason">Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation). Certificate has expired, so the relationship may be historical; confirm it still holds.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>crt.sh cert 9000005 (issuer &#x27;DEMO-R1&#x27;, valid 2026-06-01 to 2026-08-30, 3 names) lists both example-demo.test and www.fictional-supplier.co.uk; seen on 1 certificate(s); https://crt.sh/?id=9000005</code></p>
+  <p class="link-source"><span class="k">Data source</span> Certificate Transparency (crt.sh)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#19</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>dmarc_report_recipient</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>reports.msp-demo.test</code></span></p>
+  <p class="link-reason">DMARC reports go to a third-party domain; often an MSSP, parent company or consultant. Verify.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>_dmarc.example-demo.test TXT &quot;v=DMARC1; p=reject; rua=dmarc [at] reports.msp-demo.test&quot;</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#20</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>dns_a</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>partner-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>192.0.2.10</code></span></p>
+  <p class="link-reason">DNS answer (recursive resolver) for a related third-party domain. The IP has not been checked against PTR/RDAP here, so shared or cloud hosting is not ruled out. Verify.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>partner-demo.test A -&gt; 192.0.2.10</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#21</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>dns_a</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>legacy-partner.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>198.51.100.200</code></span></p>
+  <p class="link-reason">DNS answer (recursive resolver), but RDAP shows the IP belongs to a hosting/cloud provider&#x27;s netblock; shared or reassignable space. Verify before pivoting.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>legacy-partner.test A -&gt; 198.51.100.200</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#22</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>dns_a</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>api.example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>198.51.100.50</code></span></p>
+  <p class="link-reason">A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use; this may be the real origin server behind a CDN. Not yet confirmed by PTR or RDAP. Verify.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>api.example-demo.test A -&gt; 198.51.100.50</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#23</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>dns_aaaa</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>2001:db8:c10d::5</code></span></p>
+  <p class="link-reason">DNS answer (recursive resolver), but RDAP shows the IP belongs to a hosting/cloud provider&#x27;s netblock; shared or reassignable space. Verify before pivoting.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test AAAA -&gt; 2001:db8:c10d::5</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#24</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>dns_mx</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>aspmx.l.google.com.mail-spoof.test</code></span></p>
+  <p class="link-reason">Mail is handled by a third-party host not in the known-provider list; could be a smaller shared provider or a related organisation.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test MX 20 aspmx.l.google.com.mail-spoof.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#25</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>dns_ns</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>ns2.dns-host-demo.test</code></span></p>
+  <p class="link-reason">Nameserver is operated by a third party not in the known-provider list; vanity or reseller DNS is common. Verify.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test NS ns2.dns-host-demo.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#26</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>dns_ptr</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>203.0.113.140</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>edge-140.democdn.test</code></span></p>
+  <p class="link-reason">Reverse DNS names a different organisation&#x27;s hostname; could be shared hosting or a genuine related asset. Verify.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>203.0.113.140 PTR -&gt; edge-140.democdn.test  (140.113.0.203.in-addr.arpa.)</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#27</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>rdap_nameserver</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>ns2.dns-host-demo.test</code></span></p>
+  <p class="link-reason">Registry lists a third-party nameserver not in the known-provider list. Verify the operator.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP domain record for example-demo.test lists nameserver ns2.dns-host-demo.test; https://rdap.org/domain/example-demo.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#28</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>rdap_registrant_org</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>Example Demo Ltd</code></span></p>
+  <p class="link-reason">Unredacted organisation name. Pivot by searching other registrations for it, but names are self-declared and easy to fake.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP domain record for example-demo.test: registrant contact org=Example Demo Ltd; https://rdap.org/domain/example-demo.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#29</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>rdap_technical_email</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>hostmaster [at] msp-demo.test</code></span></p>
+  <p class="link-reason">Unredacted contact email at a different domain. Searching other registrations for this address is a classic pivot, but it is often a registrar, MSP or hosting-company mailbox. Verify.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP domain record for example-demo.test: technical contact email=hostmaster [at] msp-demo.test; https://rdap.org/domain/example-demo.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#30</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>rdap_technical_org</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>=HYPERLINK(&quot;http://attacker.invalid/&quot;,&quot;click me&quot;)</code></span></p>
+  <p class="link-reason">Unredacted organisation name. Pivot by searching other registrations for it, but names are self-declared and easy to fake.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP domain record for example-demo.test: technical contact org==HYPERLINK(&quot;http://attacker.invalid/&quot;,&quot;click me&quot;); https://rdap.org/domain/example-demo.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#31</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>spf_include</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>_spf.salesforce.com.attacker.invalid</code></span></p>
+  <p class="link-reason">SPF authorises an unlisted third party to send mail as this domain; indicates a business relationship. Verify who operates it.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test TXT &quot;v=spf1 mx include:_spf.salesforce.com.attacker.invalid include:mail.msp-demo.test -all&quot;</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#32</span>
+    <span class="conf medium">Medium</span>
+    <span class="link-type"><code>spf_include</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>mail.msp-demo.test</code></span></p>
+  <p class="link-reason">SPF authorises an unlisted third party to send mail as this domain; indicates a business relationship. Verify who operates it.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test TXT &quot;v=spf1 mx include:_spf.salesforce.com.attacker.invalid include:mail.msp-demo.test -all&quot;</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+</div>
+<h3 id='links-low'>Low confidence <span class='count'>6</span></h3>
+<div class='link-grid' data-confidence='low'>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#33</span>
+    <span class="conf low">Low</span>
+    <span class="link-type"><code>dns_a</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>203.0.113.140</code></span></p>
+  <p class="link-reason">IP is in a published DemoCDN (fictional) anycast/CDN range shared by many unrelated tenants.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>example-demo.test A -&gt; 203.0.113.140</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#34</span>
+    <span class="conf low">Low</span>
+    <span class="link-type"><code>dns_a</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>www.example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>203.0.113.140</code></span></p>
+  <p class="link-reason">IP is in a published DemoCDN (fictional) anycast/CDN range shared by many unrelated tenants.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>www.example-demo.test A -&gt; 203.0.113.140</code></p>
+  <p class="link-source"><span class="k">Data source</span> DNS (system resolver via dnspython)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#35</span>
+    <span class="conf low">Low</span>
+    <span class="link-type"><code>rdap_netblock</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>198.51.100.200</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>198.51.100.128/25</code></span></p>
+  <p class="link-reason">Netblock holder &#x27;Demo Cloud Hosting Inc (fictional)&#x27; is a hosting/cloud provider; many unrelated tenants share this space.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP ip record for 198.51.100.200: network 198.51.100.128/25 name=&#x27;DEMOCLOUD-V4&#x27; holder=&#x27;Demo Cloud Hosting Inc (fictional)&#x27; country=ZZ; https://rdap.org/ip/198.51.100.200</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#36</span>
+    <span class="conf low">Low</span>
+    <span class="link-type"><code>rdap_netblock</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>2001:db8:c10d::5</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>2001:db8:c10d::/48</code></span></p>
+  <p class="link-reason">Netblock holder &#x27;Demo Cloud Hosting Inc (fictional)&#x27; is a hosting/cloud provider; many unrelated tenants share this space.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP ip record for 2001:db8:c10d::5: network 2001:db8:c10d::/48 name=&#x27;DEMOCLOUD-V6&#x27; holder=&#x27;Demo Cloud Hosting Inc (fictional)&#x27; country=ZZ; https://rdap.org/ip/2001:db8:c10d::5</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#37</span>
+    <span class="conf low">Low</span>
+    <span class="link-type"><code>rdap_netblock</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>203.0.113.140</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>203.0.113.128/25</code></span></p>
+  <p class="link-reason">Netblock holder &#x27;DemoCDN Edge Hosting (fictional)&#x27; is a hosting/cloud provider; many unrelated tenants share this space.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP ip record for 203.0.113.140: network 203.0.113.128/25 name=&#x27;DEMOCDN-EDGE&#x27; holder=&#x27;DemoCDN Edge Hosting (fictional)&#x27; country=ZZ; https://rdap.org/ip/203.0.113.140</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+
+<article class="link-card">
+  <header>
+    <span class="link-num">#38</span>
+    <span class="conf low">Low</span>
+    <span class="link-type"><code>rdap_registrar</code></span>
+  </header>
+  <p class="link-entities"><span class="from"><code>example-demo.test</code></span> <span class="arrow" aria-hidden="true">→</span> <span class="to"><code>Demo Registrar (fictional)</code></span></p>
+  <p class="link-reason">Registrar is shared by millions of unrelated domains; useful only in combination with other overlaps.</p>
+  <p class="link-evidence"><span class="k">Evidence</span> <code>RDAP domain record for example-demo.test: registrar &#x27;Demo Registrar (fictional)&#x27;, IANA ID 9999; https://rdap.org/domain/example-demo.test</code></p>
+  <p class="link-source"><span class="k">Data source</span> RDAP (registry/RIR via rdap.org)</p>
+</article>
+</div>
+</div>
+<details class='as-table'><summary>View the same links as a table</summary>
+<div class='table-wrap wide' tabindex='0'><table><caption>All links, sorted by confidence</caption><thead><tr><th scope='col'>#</th><th scope='col'>Source</th><th scope='col'>Related entity</th><th scope='col'>Link type</th><th scope='col'>Confidence</th><th scope='col'>Reason</th><th scope='col'>Evidence</th><th scope='col'>Data source</th></tr></thead><tbody><tr><td data-label='#'>1</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>partner-demo.test</code></td><td data-label='Link type'>ct_shared_certificate</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation).</td><td data-label='Evidence'><code>crt.sh cert 9000003 (issuer &#x27;DEMO-R1&#x27;, valid 2026-07-15 to 2026-10-13, 2 names) lists both example-demo.test and partner-demo.test; seen on 1 certificate(s); https://crt.sh/?id=9000003</code></td><td data-label='Data source'>Certificate Transparency (crt.sh)</td></tr><tr><td data-label='#'>2</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>api.example-demo.test</code></td><td data-label='Link type'>ct_subdomain</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>A CA issued a certificate for this name under the seed domain; the requester proved control of it.</td><td data-label='Evidence'><code>crt.sh cert 9000002 (issuer &#x27;DEMO-R1&#x27;, valid 2026-08-05 to 2026-11-03) lists api.example-demo.test; seen on 1 certificate(s); https://crt.sh/?id=9000002</code></td><td data-label='Data source'>Certificate Transparency (crt.sh)</td></tr><tr><td data-label='#'>3</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>old.example-demo.test</code></td><td data-label='Link type'>ct_subdomain</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>A CA issued a certificate for this name under the seed domain; the requester proved control of it. Certificate has expired, so the name may no longer be in use.</td><td data-label='Evidence'><code>crt.sh cert 9000004 (issuer &#x27;DEMO-R1&#x27;, valid 2024-01-10 to 2024-04-09) lists old.example-demo.test; seen on 1 certificate(s); https://crt.sh/?id=9000004</code></td><td data-label='Data source'>Certificate Transparency (crt.sh)</td></tr><tr><td data-label='#'>4</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>www.example-demo.test</code></td><td data-label='Link type'>ct_subdomain</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>A CA issued a certificate for this name under the seed domain; the requester proved control of it.</td><td data-label='Evidence'><code>crt.sh cert 9000001 (issuer &#x27;DEMO-R1&#x27;, valid 2026-08-01 to 2026-10-30) lists www.example-demo.test; seen on 1 certificate(s); https://crt.sh/?id=9000001</code></td><td data-label='Data source'>Certificate Transparency (crt.sh)</td></tr><tr><td data-label='#'>5</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>192.0.2.10</code></td><td data-label='Link type'>dns_a</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>DNS answer (recursive resolver) ties the domain directly to this IP. Check the RDAP netblock for bulk hosting before pivoting.</td><td data-label='Evidence'><code>example-demo.test A -&gt; 192.0.2.10</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>6</td><td data-label='Source'><code>mx1.example-demo.test</code></td><td data-label='Related entity'><code>192.0.2.25</code></td><td data-label='Link type'>dns_a</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use, and PTR/RDAP ties that IP to the seed; likely the real origin server behind a CDN.</td><td data-label='Evidence'><code>mx1.example-demo.test A -&gt; 192.0.2.25</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>7</td><td data-label='Source'><code>ns1.example-demo.test</code></td><td data-label='Related entity'><code>192.0.2.53</code></td><td data-label='Link type'>dns_a</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use, and PTR/RDAP ties that IP to the seed; likely the real origin server behind a CDN.</td><td data-label='Evidence'><code>ns1.example-demo.test A -&gt; 192.0.2.53</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>8</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>mx1.example-demo.test</code></td><td data-label='Link type'>dns_mx</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>Mail is handled by a host under the seed&#x27;s own domain (self-hosted mail).</td><td data-label='Evidence'><code>example-demo.test MX 10 mx1.example-demo.test</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>9</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>ns1.example-demo.test</code></td><td data-label='Link type'>dns_ns</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>Nameserver is under the seed&#x27;s own domain (self-hosted DNS); strong ownership indicator.</td><td data-label='Evidence'><code>example-demo.test NS ns1.example-demo.test</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>10</td><td data-label='Source'><code>192.0.2.25</code></td><td data-label='Related entity'><code>mx1.example-demo.test</code></td><td data-label='Link type'>dns_ptr</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>Reverse DNS returns a hostname under the seed&#x27;s own domain; consistent forward/reverse ownership.</td><td data-label='Evidence'><code>192.0.2.25 PTR -&gt; mx1.example-demo.test  (25.2.0.192.in-addr.arpa.)</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>11</td><td data-label='Source'><code>192.0.2.53</code></td><td data-label='Related entity'><code>ns1.example-demo.test</code></td><td data-label='Link type'>dns_ptr</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>Reverse DNS returns a hostname under the seed&#x27;s own domain; consistent forward/reverse ownership.</td><td data-label='Evidence'><code>192.0.2.53 PTR -&gt; ns1.example-demo.test  (53.2.0.192.in-addr.arpa.)</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>12</td><td data-label='Source'><code>192.0.2.10</code></td><td data-label='Related entity'><code>web1.example-demo.test</code></td><td data-label='Link type'>dns_ptr</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>Reverse DNS returns a hostname under the seed&#x27;s own domain; consistent forward/reverse ownership.</td><td data-label='Evidence'><code>192.0.2.10 PTR -&gt; web1.example-demo.test  (10.2.0.192.in-addr.arpa.)</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>13</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>ns1.example-demo.test</code></td><td data-label='Link type'>rdap_nameserver</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>Registry lists a nameserver under the seed&#x27;s own domain (self-hosted DNS).</td><td data-label='Evidence'><code>RDAP domain record for example-demo.test lists nameserver ns1.example-demo.test; https://rdap.org/domain/example-demo.test</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr><tr><td data-label='#'>14</td><td data-label='Source'><code>192.0.2.10</code></td><td data-label='Related entity'><code>192.0.2.0/26</code></td><td data-label='Link type'>rdap_netblock</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>Netblock holder name matches the seed&#x27;s registrant/name; the IP space appears dedicated to the same organisation.</td><td data-label='Evidence'><code>RDAP ip record for 192.0.2.10: network 192.0.2.0/26 name=&#x27;EXAMPLE-DEMO-NET&#x27; holder=&#x27;Example Demo Ltd&#x27; country=ZZ; https://rdap.org/ip/192.0.2.10</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr><tr><td data-label='#'>15</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>partner-demo.test</code></td><td data-label='Link type'>shared_ip</td><td data-label='Confidence'><span class="conf high">High</span></td><td data-label='Reason'>Both domains resolve to the same IP right now, and PTR/RDAP ties that IP to the seed organisation; the other domain is likely hosted on the seed&#x27;s own infrastructure.</td><td data-label='Evidence'><code>example-demo.test A/AAAA -&gt; 192.0.2.10; partner-demo.test A/AAAA -&gt; 192.0.2.10 (both observed 2026-09-30T00:00:00+00:00)</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>16</td><td data-label='Source'><code>old.example-demo.test</code></td><td data-label='Related entity'><code>legacy-partner.test</code></td><td data-label='Link type'>ct_shared_certificate</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation). Certificate has expired, so the relationship may be historical; confirm it still holds.</td><td data-label='Evidence'><code>crt.sh cert 9000004 (issuer &#x27;DEMO-R1&#x27;, valid 2024-01-10 to 2024-04-09, 2 names) lists both old.example-demo.test and legacy-partner.test; seen on 1 certificate(s); https://crt.sh/?id=9000004</code></td><td data-label='Data source'>Certificate Transparency (crt.sh)</td></tr><tr><td data-label='#'>17</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>portal.fictional-partner.co.uk</code></td><td data-label='Link type'>ct_shared_certificate</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation). Certificate has expired, so the relationship may be historical; confirm it still holds.</td><td data-label='Evidence'><code>crt.sh cert 9000005 (issuer &#x27;DEMO-R1&#x27;, valid 2026-06-01 to 2026-08-30, 3 names) lists both example-demo.test and portal.fictional-partner.co.uk; seen on 1 certificate(s); https://crt.sh/?id=9000005</code></td><td data-label='Data source'>Certificate Transparency (crt.sh)</td></tr><tr><td data-label='#'>18</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>www.fictional-supplier.co.uk</code></td><td data-label='Link type'>ct_shared_certificate</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation). Certificate has expired, so the relationship may be historical; confirm it still holds.</td><td data-label='Evidence'><code>crt.sh cert 9000005 (issuer &#x27;DEMO-R1&#x27;, valid 2026-06-01 to 2026-08-30, 3 names) lists both example-demo.test and www.fictional-supplier.co.uk; seen on 1 certificate(s); https://crt.sh/?id=9000005</code></td><td data-label='Data source'>Certificate Transparency (crt.sh)</td></tr><tr><td data-label='#'>19</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>reports.msp-demo.test</code></td><td data-label='Link type'>dmarc_report_recipient</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>DMARC reports go to a third-party domain; often an MSSP, parent company or consultant. Verify.</td><td data-label='Evidence'><code>_dmarc.example-demo.test TXT &quot;v=DMARC1; p=reject; rua=dmarc [at] reports.msp-demo.test&quot;</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>20</td><td data-label='Source'><code>partner-demo.test</code></td><td data-label='Related entity'><code>192.0.2.10</code></td><td data-label='Link type'>dns_a</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>DNS answer (recursive resolver) for a related third-party domain. The IP has not been checked against PTR/RDAP here, so shared or cloud hosting is not ruled out. Verify.</td><td data-label='Evidence'><code>partner-demo.test A -&gt; 192.0.2.10</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>21</td><td data-label='Source'><code>legacy-partner.test</code></td><td data-label='Related entity'><code>198.51.100.200</code></td><td data-label='Link type'>dns_a</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>DNS answer (recursive resolver), but RDAP shows the IP belongs to a hosting/cloud provider&#x27;s netblock; shared or reassignable space. Verify before pivoting.</td><td data-label='Evidence'><code>legacy-partner.test A -&gt; 198.51.100.200</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>22</td><td data-label='Source'><code>api.example-demo.test</code></td><td data-label='Related entity'><code>198.51.100.50</code></td><td data-label='Link type'>dns_a</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use; this may be the real origin server behind a CDN. Not yet confirmed by PTR or RDAP. Verify.</td><td data-label='Evidence'><code>api.example-demo.test A -&gt; 198.51.100.50</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>23</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>2001:db8:c10d::5</code></td><td data-label='Link type'>dns_aaaa</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>DNS answer (recursive resolver), but RDAP shows the IP belongs to a hosting/cloud provider&#x27;s netblock; shared or reassignable space. Verify before pivoting.</td><td data-label='Evidence'><code>example-demo.test AAAA -&gt; 2001:db8:c10d::5</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>24</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>aspmx.l.google.com.mail-spoof.test</code></td><td data-label='Link type'>dns_mx</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Mail is handled by a third-party host not in the known-provider list; could be a smaller shared provider or a related organisation.</td><td data-label='Evidence'><code>example-demo.test MX 20 aspmx.l.google.com.mail-spoof.test</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>25</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>ns2.dns-host-demo.test</code></td><td data-label='Link type'>dns_ns</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Nameserver is operated by a third party not in the known-provider list; vanity or reseller DNS is common. Verify.</td><td data-label='Evidence'><code>example-demo.test NS ns2.dns-host-demo.test</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>26</td><td data-label='Source'><code>203.0.113.140</code></td><td data-label='Related entity'><code>edge-140.democdn.test</code></td><td data-label='Link type'>dns_ptr</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Reverse DNS names a different organisation&#x27;s hostname; could be shared hosting or a genuine related asset. Verify.</td><td data-label='Evidence'><code>203.0.113.140 PTR -&gt; edge-140.democdn.test  (140.113.0.203.in-addr.arpa.)</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>27</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>ns2.dns-host-demo.test</code></td><td data-label='Link type'>rdap_nameserver</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Registry lists a third-party nameserver not in the known-provider list. Verify the operator.</td><td data-label='Evidence'><code>RDAP domain record for example-demo.test lists nameserver ns2.dns-host-demo.test; https://rdap.org/domain/example-demo.test</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr><tr><td data-label='#'>28</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>Example Demo Ltd</code></td><td data-label='Link type'>rdap_registrant_org</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Unredacted organisation name. Pivot by searching other registrations for it, but names are self-declared and easy to fake.</td><td data-label='Evidence'><code>RDAP domain record for example-demo.test: registrant contact org=Example Demo Ltd; https://rdap.org/domain/example-demo.test</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr><tr><td data-label='#'>29</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>hostmaster [at] msp-demo.test</code></td><td data-label='Link type'>rdap_technical_email</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Unredacted contact email at a different domain. Searching other registrations for this address is a classic pivot, but it is often a registrar, MSP or hosting-company mailbox. Verify.</td><td data-label='Evidence'><code>RDAP domain record for example-demo.test: technical contact email=hostmaster [at] msp-demo.test; https://rdap.org/domain/example-demo.test</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr><tr><td data-label='#'>30</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>=HYPERLINK(&quot;http://attacker.invalid/&quot;,&quot;click me&quot;)</code></td><td data-label='Link type'>rdap_technical_org</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>Unredacted organisation name. Pivot by searching other registrations for it, but names are self-declared and easy to fake.</td><td data-label='Evidence'><code>RDAP domain record for example-demo.test: technical contact org==HYPERLINK(&quot;http://attacker.invalid/&quot;,&quot;click me&quot;); https://rdap.org/domain/example-demo.test</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr><tr><td data-label='#'>31</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>_spf.salesforce.com.attacker.invalid</code></td><td data-label='Link type'>spf_include</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>SPF authorises an unlisted third party to send mail as this domain; indicates a business relationship. Verify who operates it.</td><td data-label='Evidence'><code>example-demo.test TXT &quot;v=spf1 mx include:_spf.salesforce.com.attacker.invalid include:mail.msp-demo.test -all&quot;</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>32</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>mail.msp-demo.test</code></td><td data-label='Link type'>spf_include</td><td data-label='Confidence'><span class="conf medium">Medium</span></td><td data-label='Reason'>SPF authorises an unlisted third party to send mail as this domain; indicates a business relationship. Verify who operates it.</td><td data-label='Evidence'><code>example-demo.test TXT &quot;v=spf1 mx include:_spf.salesforce.com.attacker.invalid include:mail.msp-demo.test -all&quot;</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>33</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>203.0.113.140</code></td><td data-label='Link type'>dns_a</td><td data-label='Confidence'><span class="conf low">Low</span></td><td data-label='Reason'>IP is in a published DemoCDN (fictional) anycast/CDN range shared by many unrelated tenants.</td><td data-label='Evidence'><code>example-demo.test A -&gt; 203.0.113.140</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>34</td><td data-label='Source'><code>www.example-demo.test</code></td><td data-label='Related entity'><code>203.0.113.140</code></td><td data-label='Link type'>dns_a</td><td data-label='Confidence'><span class="conf low">Low</span></td><td data-label='Reason'>IP is in a published DemoCDN (fictional) anycast/CDN range shared by many unrelated tenants.</td><td data-label='Evidence'><code>www.example-demo.test A -&gt; 203.0.113.140</code></td><td data-label='Data source'>DNS (system resolver via dnspython)</td></tr><tr><td data-label='#'>35</td><td data-label='Source'><code>198.51.100.200</code></td><td data-label='Related entity'><code>198.51.100.128/25</code></td><td data-label='Link type'>rdap_netblock</td><td data-label='Confidence'><span class="conf low">Low</span></td><td data-label='Reason'>Netblock holder &#x27;Demo Cloud Hosting Inc (fictional)&#x27; is a hosting/cloud provider; many unrelated tenants share this space.</td><td data-label='Evidence'><code>RDAP ip record for 198.51.100.200: network 198.51.100.128/25 name=&#x27;DEMOCLOUD-V4&#x27; holder=&#x27;Demo Cloud Hosting Inc (fictional)&#x27; country=ZZ; https://rdap.org/ip/198.51.100.200</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr><tr><td data-label='#'>36</td><td data-label='Source'><code>2001:db8:c10d::5</code></td><td data-label='Related entity'><code>2001:db8:c10d::/48</code></td><td data-label='Link type'>rdap_netblock</td><td data-label='Confidence'><span class="conf low">Low</span></td><td data-label='Reason'>Netblock holder &#x27;Demo Cloud Hosting Inc (fictional)&#x27; is a hosting/cloud provider; many unrelated tenants share this space.</td><td data-label='Evidence'><code>RDAP ip record for 2001:db8:c10d::5: network 2001:db8:c10d::/48 name=&#x27;DEMOCLOUD-V6&#x27; holder=&#x27;Demo Cloud Hosting Inc (fictional)&#x27; country=ZZ; https://rdap.org/ip/2001:db8:c10d::5</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr><tr><td data-label='#'>37</td><td data-label='Source'><code>203.0.113.140</code></td><td data-label='Related entity'><code>203.0.113.128/25</code></td><td data-label='Link type'>rdap_netblock</td><td data-label='Confidence'><span class="conf low">Low</span></td><td data-label='Reason'>Netblock holder &#x27;DemoCDN Edge Hosting (fictional)&#x27; is a hosting/cloud provider; many unrelated tenants share this space.</td><td data-label='Evidence'><code>RDAP ip record for 203.0.113.140: network 203.0.113.128/25 name=&#x27;DEMOCDN-EDGE&#x27; holder=&#x27;DemoCDN Edge Hosting (fictional)&#x27; country=ZZ; https://rdap.org/ip/203.0.113.140</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr><tr><td data-label='#'>38</td><td data-label='Source'><code>example-demo.test</code></td><td data-label='Related entity'><code>Demo Registrar (fictional)</code></td><td data-label='Link type'>rdap_registrar</td><td data-label='Confidence'><span class="conf low">Low</span></td><td data-label='Reason'>Registrar is shared by millions of unrelated domains; useful only in combination with other overlaps.</td><td data-label='Evidence'><code>RDAP domain record for example-demo.test: registrar &#x27;Demo Registrar (fictional)&#x27;, IANA ID 9999; https://rdap.org/domain/example-demo.test</code></td><td data-label='Data source'>RDAP (registry/RIR via rdap.org)</td></tr></tbody></table></div>
+</details>
+</section>
+<section id='shared'>
+<h2>Shared-infrastructure flags</h2>
+<p>These links were downgraded because the related entity is shared by many unrelated organisations. Pivoting on them will mostly return noise.</p>
+<div class='table-wrap' tabindex='0'><table><caption>Entities flagged as shared, expired, or otherwise downgraded</caption><thead><tr><th scope='col'>Related entity</th><th scope='col'>Flag</th><th scope='col'>Reason</th></tr></thead><tbody><tr><td data-label='Related entity'><code>old.example-demo.test</code></td><td data-label='Flag'>expired_certificate</td><td data-label='Reason'>A CA issued a certificate for this name under the seed domain; the requester proved control of it. Certificate has expired, so the name may no longer be in use.</td></tr><tr><td data-label='Related entity'><code>192.0.2.25</code></td><td data-label='Flag'>possible_origin_ip, origin_confirmed</td><td data-label='Reason'>A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use, and PTR/RDAP ties that IP to the seed; likely the real origin server behind a CDN.</td></tr><tr><td data-label='Related entity'><code>192.0.2.53</code></td><td data-label='Flag'>possible_origin_ip, origin_confirmed</td><td data-label='Reason'>A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use, and PTR/RDAP ties that IP to the seed; likely the real origin server behind a CDN.</td></tr><tr><td data-label='Related entity'><code>192.0.2.0/26</code></td><td data-label='Flag'>dedicated_netblock</td><td data-label='Reason'>Netblock holder name matches the seed&#x27;s registrant/name; the IP space appears dedicated to the same organisation.</td></tr><tr><td data-label='Related entity'><code>legacy-partner.test</code></td><td data-label='Flag'>expired_certificate</td><td data-label='Reason'>Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation). Certificate has expired, so the relationship may be historical; confirm it still holds.</td></tr><tr><td data-label='Related entity'><code>portal.fictional-partner.co.uk</code></td><td data-label='Flag'>expired_certificate</td><td data-label='Reason'>Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation). Certificate has expired, so the relationship may be historical; confirm it still holds.</td></tr><tr><td data-label='Related entity'><code>www.fictional-supplier.co.uk</code></td><td data-label='Flag'>expired_certificate</td><td data-label='Reason'>Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation). Certificate has expired, so the relationship may be historical; confirm it still holds.</td></tr><tr><td data-label='Related entity'><code>192.0.2.10</code></td><td data-label='Flag'>unverified_third_party_ip</td><td data-label='Reason'>DNS answer (recursive resolver) for a related third-party domain. The IP has not been checked against PTR/RDAP here, so shared or cloud hosting is not ruled out. Verify.</td></tr><tr><td data-label='Related entity'><code>198.51.100.200</code></td><td data-label='Flag'>unverified_third_party_ip, cloud_hosted_ip</td><td data-label='Reason'>DNS answer (recursive resolver), but RDAP shows the IP belongs to a hosting/cloud provider&#x27;s netblock; shared or reassignable space. Verify before pivoting.</td></tr><tr><td data-label='Related entity'><code>198.51.100.50</code></td><td data-label='Flag'>possible_origin_ip</td><td data-label='Reason'>A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use; this may be the real origin server behind a CDN. Not yet confirmed by PTR or RDAP. Verify.</td></tr><tr><td data-label='Related entity'><code>2001:db8:c10d::5</code></td><td data-label='Flag'>cloud_hosted_ip</td><td data-label='Reason'>DNS answer (recursive resolver), but RDAP shows the IP belongs to a hosting/cloud provider&#x27;s netblock; shared or reassignable space. Verify before pivoting.</td></tr><tr><td data-label='Related entity'><code>203.0.113.140</code></td><td data-label='Flag'>shared_cdn</td><td data-label='Reason'>IP is in a published DemoCDN (fictional) anycast/CDN range shared by many unrelated tenants.</td></tr><tr><td data-label='Related entity'><code>203.0.113.140</code></td><td data-label='Flag'>shared_cdn</td><td data-label='Reason'>IP is in a published DemoCDN (fictional) anycast/CDN range shared by many unrelated tenants.</td></tr><tr><td data-label='Related entity'><code>198.51.100.128/25</code></td><td data-label='Flag'>bulk_hosting_netblock</td><td data-label='Reason'>Netblock holder &#x27;Demo Cloud Hosting Inc (fictional)&#x27; is a hosting/cloud provider; many unrelated tenants share this space.</td></tr><tr><td data-label='Related entity'><code>2001:db8:c10d::/48</code></td><td data-label='Flag'>bulk_hosting_netblock</td><td data-label='Reason'>Netblock holder &#x27;Demo Cloud Hosting Inc (fictional)&#x27; is a hosting/cloud provider; many unrelated tenants share this space.</td></tr><tr><td data-label='Related entity'><code>203.0.113.128/25</code></td><td data-label='Flag'>bulk_hosting_netblock</td><td data-label='Reason'>Netblock holder &#x27;DemoCDN Edge Hosting (fictional)&#x27; is a hosting/cloud provider; many unrelated tenants share this space.</td></tr><tr><td data-label='Related entity'><code>Demo Registrar (fictional)</code></td><td data-label='Flag'>shared_registrar</td><td data-label='Reason'>Registrar is shared by millions of unrelated domains; useful only in combination with other overlaps.</td></tr></tbody></table></div>
+</section>
+<section id='gaps'>
+<h2>Gaps and limitations</h2>
+<p>Every query the demo made is listed below, including the ones that returned nothing. The tool records those gaps instead of hiding them. In this run, <strong>0</strong> sources failed and <strong>14</strong> queries returned no data (for example <code>nxdomain</code> or an empty record set).</p><p class='limits'>This is a synthetic offline demo, not a live investigation. Confidence rates how well a single observation supports an infrastructure relationship. It is not attribution, and it is not a conclusion about a real organisation.</p><p>Every query made, including the ones that failed or returned nothing, so gaps are visible.</p><div class='table-wrap log' tabindex='0'><table><caption>Collection log: every query, including empty and failed lookups</caption><thead><tr><th scope='col'>Source</th><th scope='col'>Query</th><th scope='col'>Status</th><th scope='col'>Detail</th><th scope='col'>Timestamp</th></tr></thead><tbody><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>example-demo.test A</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>2 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>example-demo.test AAAA</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>example-demo.test MX</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>2 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>example-demo.test NS</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>2 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>example-demo.test TXT</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>2 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>_dmarc.example-demo.test TXT</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>192.0.2.10 PTR</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>203.0.113.140 PTR</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>2001:db8:c10d::5 PTR</code></td><td data-label='Status'><span class='status gap'>nxdomain ·</span></td><td data-label='Detail'>name does not exist</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>crt.sh</td><td data-label='Query'><code>file:crtsh.json</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>6 entries loaded from file (no network)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>api.example-demo.test A</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>198.51.100.50 PTR</code></td><td data-label='Status'><span class='status gap'>nxdomain ·</span></td><td data-label='Detail'>name does not exist</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>api.example-demo.test AAAA</code></td><td data-label='Status'><span class='status gap'>empty ·</span></td><td data-label='Detail'>name exists but has no records of this type</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>legacy-partner.test A</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>legacy-partner.test AAAA</code></td><td data-label='Status'><span class='status gap'>empty ·</span></td><td data-label='Detail'>name exists but has no records of this type</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>mx1.example-demo.test A</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>192.0.2.25 PTR</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>mx1.example-demo.test AAAA</code></td><td data-label='Status'><span class='status gap'>empty ·</span></td><td data-label='Detail'>name exists but has no records of this type</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>ns1.example-demo.test A</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>192.0.2.53 PTR</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>ns1.example-demo.test AAAA</code></td><td data-label='Status'><span class='status gap'>empty ·</span></td><td data-label='Detail'>name exists but has no records of this type</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>old.example-demo.test A</code></td><td data-label='Status'><span class='status gap'>nxdomain ·</span></td><td data-label='Detail'>name does not exist</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>old.example-demo.test AAAA</code></td><td data-label='Status'><span class='status gap'>nxdomain ·</span></td><td data-label='Detail'>name does not exist</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>partner-demo.test A</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>partner-demo.test AAAA</code></td><td data-label='Status'><span class='status gap'>empty ·</span></td><td data-label='Detail'>name exists but has no records of this type</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>portal.fictional-partner.co.uk A</code></td><td data-label='Status'><span class='status gap'>nxdomain ·</span></td><td data-label='Detail'>name does not exist</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>portal.fictional-partner.co.uk AAAA</code></td><td data-label='Status'><span class='status gap'>nxdomain ·</span></td><td data-label='Detail'>name does not exist</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>DNS</td><td data-label='Query'><code>www.example-demo.test A</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>1 record(s)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>www.example-demo.test AAAA</code></td><td data-label='Status'><span class='status gap'>empty ·</span></td><td data-label='Detail'>name exists but has no records of this type</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>www.fictional-supplier.co.uk A</code></td><td data-label='Status'><span class='status gap'>nxdomain ·</span></td><td data-label='Detail'>name does not exist</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr class='gap-row'><td data-label='Source'>DNS</td><td data-label='Query'><code>www.fictional-supplier.co.uk AAAA</code></td><td data-label='Status'><span class='status gap'>nxdomain ·</span></td><td data-label='Detail'>name does not exist</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>RDAP</td><td data-label='Query'><code>rdap domain example-demo.test</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>loaded from domain_example-demo.test.json (no network)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>RDAP</td><td data-label='Query'><code>rdap ip 192.0.2.10</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>loaded from ip_192.0.2.10.json (no network)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>RDAP</td><td data-label='Query'><code>rdap ip 2001:db8:c10d::5</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>loaded from ip_2001-db8-c10d--5.json (no network)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>RDAP</td><td data-label='Query'><code>rdap ip 203.0.113.140</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>loaded from ip_203.0.113.140.json (no network)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr><tr><td data-label='Source'>RDAP</td><td data-label='Query'><code>rdap ip 198.51.100.200 (related host)</code></td><td data-label='Status'><span class='status ok'>ok</span></td><td data-label='Detail'>loaded from ip_198.51.100.200.json (no network)</td><td data-label='Timestamp'>2026-09-30T00:00:00+00:00</td></tr></tbody></table></div>
+</section>
+<section id='types'>
+<h2>Link types in this report</h2>
+<ul>
+<li><code>ct_shared_certificate</code>: 4</li>
+<li><code>ct_subdomain</code>: 3</li>
+<li><code>dmarc_report_recipient</code>: 1</li>
+<li><code>dns_a</code>: 8</li>
+<li><code>dns_aaaa</code>: 1</li>
+<li><code>dns_mx</code>: 2</li>
+<li><code>dns_ns</code>: 2</li>
+<li><code>dns_ptr</code>: 4</li>
+<li><code>rdap_nameserver</code>: 2</li>
+<li><code>rdap_netblock</code>: 4</li>
+<li><code>rdap_registrant_org</code>: 1</li>
+<li><code>rdap_registrar</code>: 1</li>
+<li><code>rdap_technical_email</code>: 1</li>
+<li><code>rdap_technical_org</code>: 1</li>
+<li><code>shared_ip</code>: 1</li>
+<li><code>spf_include</code>: 2</li>
+</ul>
+</section>
+    <p class="report-footnote">Generated from the tool's offline synthetic demo (pinned timestamp 2026-09-30T00:00:00+00:00). Fictional mailbox strings from the fixtures are shown defanged (for example, user [at] host) so this page does not contain email addresses. Source files: the committed sample report in the <a href="https://github.com/N3bula04/osint-pivot-tool" rel="noopener">osint-pivot-tool</a> repository.</p>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Jeremy. Personal site; views are my own. This page is a fictional offline demo. No tracking or analytics on this site.</p>
+  </div>
+</footer>
+</body>
+</html>
