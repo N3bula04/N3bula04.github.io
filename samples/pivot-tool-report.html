@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OSINT Pivot Tool — fictional demo report | Jeremy</title>
-<meta name="description" content="Fictional offline demo report from the OSINT Pivot Tool, starting at example-demo.test. Shows evidence-rated links, confidence, and collection gaps. No live or real-world infrastructure.">
+<meta name="description" content="Fictional offline demo report from the OSINT Pivot Tool, starting at example-demo.test. Opens with an assessment of the links that matter most, an alternative explanation, and the biggest source gap, then the full evidence table. No live or real-world infrastructure.">
 <meta name="color-scheme" content="light dark">
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../style.css">
@@ -34,10 +34,11 @@
   </header>
   <div class="wrap report-body">
     <aside class='banner' role='note'><p class='banner-label'>Fictional offline demo output</p><p><strong>SYNTHETIC DEMO.</strong> Every name, IP address and registration record in this report comes from committed offline fixtures. The names use reserved or fictional domains and the IPs sit in documentation ranges (RFC 5737 / RFC 3849). Nothing here describes real infrastructure.</p><p><strong>Analyst note.</strong> Every link below is a lead, not a conclusion. Confidence reflects how well a single observation supports an infrastructure relationship; it is not an attribution. This tool does not name actors.</p></aside>
-    
+
 <nav class="toc" aria-label="Report sections">
   <p>On this page</p>
   <ol>
+    <li><a href="#assessment">Assessment</a></li>
     <li><a href="#summary">Summary</a></li>
     <li><a href="#certificate-transparency">Certificate transparency</a></li>
     <li><a href="#ip-pivot">IP pivot</a></li>
@@ -48,7 +49,18 @@
   </ol>
 </nav>
 
-    
+<section id='assessment'>
+<h2>Assessment</h2>
+<p>This lead summary draws on the collected links and collection log. Use it to guide verification without drawing conclusions or assigning responsibility.</p>
+<p><strong>Priority leads</strong></p>
+<ol>
+<li><code>partner-demo.test</code> from <code>example-demo.test</code> (<strong>High</strong>, <code>ct_shared_certificate</code>) — Both names sit on the same certificate; the requester proved control of both at issuance (CA domain validation) (also observed via <code>shared_ip</code>).</li>
+<li><code>192.0.2.0/26</code> from <code>192.0.2.10</code> (<strong>High</strong>, <code>rdap_netblock</code>) — Netblock holder name matches the seed&#x27;s registrant/name; the IP space appears dedicated to the same organisation.</li>
+<li><code>192.0.2.25</code> from <code>mx1.example-demo.test</code> (<strong>High</strong>, <code>dns_a</code>) — A host under the seed&#x27;s own domain resolves to a non-CDN IP the seed itself does not use, and PTR/RDAP ties that IP to the seed.</li>
+</ol>
+<p><strong>Alternative explanation:</strong> <code>partner-demo.test</code> may be a customer or vendor using the same infrastructure, so the overlap could reflect a service relationship.</p>
+<p><strong>Biggest source gap:</strong> DNS query <code>198.51.100.50 PTR</code> returned <code>nxdomain</code> — <code>name does not exist</code>. This lookup would help check the possible origin IP. Collection logged 0 failed and 14 no-data queries.</p>
+</section>
 <section id='meta'>
 <h2>Run details</h2>
 <dl class='meta-list'>
